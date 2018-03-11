@@ -4,14 +4,9 @@
 
 #include "List.h"
 #include <iostream>
+#include "IndexError.h"
 
 using namespace std;
-
-struct IndexError : public exception {
-    const char* what() const throw() {
-        return "Index out of range";
-    }
-};
 
 List::List() {
     head = nullptr;
@@ -74,12 +69,12 @@ void List::insert(int value, int index) {
     }
 }
 
-void List::removeFirst(){
+void List::removeFirst() {
     removeOnIndex(0);
 }
 
 void List::removeLast() {
-    removeOnIndex(size-1);
+    removeOnIndex(size - 1);
 }
 
 void List::removeOnIndex(int index) {
