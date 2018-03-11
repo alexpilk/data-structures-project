@@ -24,12 +24,22 @@ void test_list(){
     my_list.print();
     cout << my_list.getSize() << endl;
 }
+
 int main(){
-//    test_list();
     DynamicArray my_array = DynamicArray();
     my_array.print();
-    my_array.insert(4, 0);
-    my_array.insert(5, 1);
+    my_array.addFirst(3);
+    my_array.print();
+    my_array.addLast(4);
+    my_array.print();
+    my_array.addLast(6);
+    my_array.print();
+    my_array.insert(5, 2);
+    my_array.print();
+    my_array.removeOnIndex(1);
+    my_array.print();
+    my_array.removeFirst();
+    my_array.removeLast();
     my_array.print();
     return 0;
 };

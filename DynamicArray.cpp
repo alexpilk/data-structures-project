@@ -30,7 +30,7 @@ void DynamicArray::insert(int value, int index) {
         throw IndexError();
     size++;
     auto *new_array = new int[size];
-    for (int i = 0; i < index; ++i) {
+    for (int i = 0; i < index; i++) {
         new_array[i] = array[i];
     }
     new_array[index] = value;
@@ -53,11 +53,11 @@ void DynamicArray::removeOnIndex(int index) {
         throw IndexError();
     size--;
     auto *new_array = new int[size];
-    for (int i = 0; i < index; ++i) {
+    for (int i = 0; i < index; i++) {
         new_array[i] = array[i];
     }
-    for (int i = index + 1; i < size; i++) {
-        new_array[i] = array[i - 1];
+    for (int i = index; i < size; i++) {
+        new_array[i] = array[i + 1];
     }
     array = new_array;
 }
