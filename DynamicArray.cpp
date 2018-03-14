@@ -9,11 +9,15 @@ using namespace std;
 
 DynamicArray::DynamicArray() {
     size = 0;
-//    int ar[0] = {};
     array = new int[0];
 }
 
-int DynamicArray::getElement(int index) {
+DynamicArray::DynamicArray(int input_array[], int input_size) {
+    size = input_size;
+    array = input_array;
+}
+
+int DynamicArray::getElementValue(int index) {
     return array[index];
 }
 
@@ -73,5 +77,11 @@ void DynamicArray::print() {
 }
 
 int DynamicArray::getSize() {
-    return 0;
+    return size;
+}
+
+void DynamicArray::swap(int index_1, int index_2) {
+    int temp = array[index_1];
+    array[index_1] = array[index_2];
+    array[index_2] = temp;
 }

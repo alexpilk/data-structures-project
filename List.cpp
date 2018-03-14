@@ -24,6 +24,11 @@ List::Element *List::getElement(int index) {
     return current_element;
 }
 
+int List::getElementValue(int index) {
+    Element *element = getElement(index);
+    return element->value;
+}
+
 int List::getSize() {
     return size;
 }
@@ -100,4 +105,12 @@ void List::print() {
         temp = temp->next;
     }
     cout << temp->value << "]" << endl;
+}
+
+void List::swap(int index_1, int index_2) {
+    Element* element_1 = getElement(index_1);
+    Element* element_2 = getElement(index_2);
+    int temp = element_1->value;
+    element_1->value = element_2->value;
+    element_2->value = temp;
 }

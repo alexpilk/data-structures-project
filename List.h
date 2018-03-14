@@ -5,9 +5,9 @@
 #ifndef SDIZO_PROJ_1_LIST_H
 #define SDIZO_PROJ_1_LIST_H
 
-#include "DataStructure.h"
+#include "IndexedDataStructure.h"
 
-class List : public DataStructure {
+class List : public IndexedDataStructure {
     struct Element {
         int value;
         Element *next;
@@ -29,6 +29,8 @@ public:
 
     Element *getElement(int index);
 
+    int getElementValue(int index);
+
     void addFirst(int value);
 
     void addLast(int value);
@@ -40,6 +42,8 @@ public:
     void removeLast();
 
     void removeOnIndex(int index);
+
+    void swap(int index_1, int index_2);
 
     void print() override;
 

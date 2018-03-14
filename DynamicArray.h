@@ -5,9 +5,9 @@
 #ifndef SDIZO_PROJ_1_DYNAMICARRAY_H
 #define SDIZO_PROJ_1_DYNAMICARRAY_H
 
-#include "DataStructure.h"
+#include "IndexedDataStructure.h"
 
-class DynamicArray : public DataStructure {
+class DynamicArray : public IndexedDataStructure {
 private:
     int size;
     int *array;
@@ -15,23 +15,27 @@ private:
 public:
     DynamicArray();
 
-    int getElement(int index);
+    DynamicArray(int input_array[], int input_size);
 
-    void addFirst(int value);
+    int getElementValue(int index) override;
 
-    void addLast(int value);
+    void addFirst(int value) override;
 
-    void insert(int value, int index);
+    void addLast(int value) override;
 
-    void removeFirst();
+    void insert(int value, int index) override;
 
-    void removeLast();
+    void removeFirst() override;
 
-    void removeOnIndex(int index);
+    void removeLast() override;
+
+    void removeOnIndex(int index) override;
+
+    void swap(int index_1, int index_2) override;
 
     void print() override;
 
-    int getSize();
+    int getSize() override;
 };
 
 

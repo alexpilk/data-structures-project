@@ -1,6 +1,8 @@
 #include <iostream>
 #include "List.h"
 #include "DynamicArray.h"
+#include "Heap.h"
+#include "utils.h"
 
 using namespace std;
 
@@ -25,7 +27,7 @@ void test_list(){
     cout << my_list.getSize() << endl;
 }
 
-int main(){
+void test_dynamic_array(){
     DynamicArray my_array = DynamicArray();
     my_array.print();
     my_array.addFirst(3);
@@ -41,5 +43,19 @@ int main(){
     my_array.removeFirst();
     my_array.removeLast();
     my_array.print();
-    return 0;
 };
+
+void test_heap(){
+    int base_array[] = {2, 3, 4, 4, 5, 6, 4, 5, 5, 6, 7, 8, 8, 9, 5};
+    int base_array_size = getArraySize(base_array);
+    auto* input_array = new DynamicArray(base_array, base_array_size);
+    Heap my_heap = Heap(input_array);
+    my_heap.print();
+}
+
+int main(){
+//    test_list();
+//    test_dynamic_array();
+    test_heap();
+    return 0;
+}
