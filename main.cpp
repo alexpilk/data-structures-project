@@ -7,6 +7,7 @@
 using namespace std;
 
 void test_list(){
+    cout << "Testing linked list" << endl;
     List my_list = List();
     my_list.addFirst(1);
     my_list.print();
@@ -28,6 +29,7 @@ void test_list(){
 }
 
 void test_dynamic_array(){
+    cout << "Testing dynamic array" << endl;
     DynamicArray my_array = DynamicArray();
     my_array.print();
     my_array.addFirst(3);
@@ -46,16 +48,22 @@ void test_dynamic_array(){
 };
 
 void test_heap(){
-    int base_array[] = {2, 3, 4, 4, 5, 6, 4, 5, 5, 6, 7, 8, 8, 9, 5};
+    cout << "Testing heap" << endl;
+    int base_array[] = {2, 9, 4, 4, 2, 6, 4, 5, 5, 6, 7, 8, 1, 9, 5};
     int base_array_size = getArraySize(base_array);
-    auto* input_array = new DynamicArray(base_array, base_array_size);
+    auto* input_array = new List(base_array, base_array_size);
     Heap my_heap = Heap(input_array);
+    my_heap.insert(80);
+    my_heap.insert(800);
+    my_heap.print();
+    int extracted = my_heap.extract();
+    cout << "Extracted: " << extracted << endl;
     my_heap.print();
 }
 
 int main(){
-//    test_list();
-//    test_dynamic_array();
+    test_list();
+    test_dynamic_array();
     test_heap();
     return 0;
 }

@@ -5,82 +5,100 @@
 #include "Heap.h"
 #include "IndexError.h"
 #include "cmath"
-#include "utils.h"
 
 using namespace std;
 
-Heap::Heap() {
-    size = 0;
-    capacity = 0;
-}
+Heap::Heap() = default;
 
-Heap::Heap(DynamicArray* input_array) {
+Heap::Heap(IndexedDataStructure *input_array) {
     array = input_array;
-    size = array->getSize();
-    for (int i = array->getSize() / 2 - 1; i >= 0; i--)
-        heapify(array, array->getSize(), i);
+    buildHeap();
 }
 
-Heap::Heap(List* input_array) {
-    array = input_array;
+void Heap::buildHeap(){
+    // index of the rightmost node on second to last level
+    int start_index = getSize() / 2 - 1;
+    for (int i = start_index; i >= 0; i--)
+        heapify(getSize(), i);
 }
 
-void Heap::heapify(IndexedDataStructure* arr, int n, int i)
-{
-    int largest = i;  // Initialize largest as root
-    int l = 2*i + 1;  // left = 2*i + 1
-    int r = 2*i + 2;  // right = 2*i + 2
+void Heap::heapify(int size, int root_index) {
+    int largest_index = root_index;
+    int left_index = 2 * root_index + 1;
+    int right_index = 2 * root_index + 2;
+    int largest_node, left_node, right_node;
 
-    // If left child is larger than root
-    if (l < n && arr->getElementValue(l) > arr->getElementValue(largest))
-        largest = l;
+    if (left_index < size) {
+        left_node = array->getElementValue(left_index);
+        largest_node = array->getElementValue(largest_index);
+        if (left_node > largest_node)
+            largest_index = left_index;
+    }
 
-    // If right child is larger than largest so far
-    if (r < n && arr->getElementValue(r) > arr->getElementValue(largest))
-        largest = r;
+    if (right_index < size) {
+        right_node = array->getElementValue(right_index);
+        largest_node = array->getElementValue(largest_index);
+        if (right_node > largest_node)
+            largest_index = right_index;
+    }
 
-    // If largest is not root
-    if (largest != i)
-    {
-        arr->print();
-        arr->swap(i, largest);
-        arr->print();
-        // Recursively heapify the affected sub-tree
-        heapify(arr, n, largest);
+    if (largest_index != root_index) {
+        array->swap(root_index, largest_index);
+        heapify(size, largest_index);
     }
 }
 
 int Heap::findMax() {
-    if (size > 0)
+    if (getSize() > 0)
         return array->getElementValue(0);
     else
         throw IndexError();
 }
 
 int Heap::extract() {
-    return 0;
+    int output_element = findMax();
+    array->removeFirst();
+    buildHeap();
+    return output_element;
+}
+
+int Heap::getSize(){
+    return array->getSize();
 }
 
 void Heap::insert(int value) {
-
+    array->addLast(value);
+    int size = getSize();
+    int element_index = size-1;
+    int parent_index;
+    while (element_index > 0) {
+        parent_index = int(floor(element_index / 2));
+        if (array->getElementValue(element_index) > array->getElementValue(parent_index)) {
+            array->swap(parent_index, element_index);
+            element_index = parent_index;
+        } else {
+            break;
+        }
+    };
 }
 
 void Heap::print() {
-    array->print();
     int level = 0;
     int node_counter = 0;
-    for (int i = 0; i < array->getSize(); i++){
-        if(node_counter >= pow(2, level)){
+    for (int i = 0; i < array->getSize(); i++) {
+        if (node_counter >= pow(2, level)) {
             level++;
             node_counter = 0;
             cout << ")" << endl;
         }
-        if(node_counter % 2 == 0) {
-            if(node_counter == 0) {
+        if (node_counter % 2 == 0) {
+            if (node_counter == 0) {
                 cout << "(";
             } else {
                 cout << ")(";
             }
+        } else {
+            cout << ",";
         }
         cout << array->getElementValue(i);
         node_counter++;

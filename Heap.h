@@ -16,17 +16,16 @@
 class Heap : DataStructure{
 private:
     IndexedDataStructure* array;
-    int size;
-    int capacity;
 public:
     Heap();
-    explicit Heap(DynamicArray* input_array);
-    explicit Heap(List* input_array);
-    void heapify(IndexedDataStructure* arr, int n, int i);
+    explicit Heap(IndexedDataStructure* input_array);
+    void buildHeap();
+    void heapify(int size, int root_index);
     int findMax();
     int extract();
+    int getSize();
     void insert(int value);
-    void print();
+    void print() override;
 };
 
 

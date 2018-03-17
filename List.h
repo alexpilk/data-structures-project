@@ -27,27 +27,29 @@ private:
 public:
     List();
 
+    List(int input_array[], int input_size);
+
     Element *getElement(int index);
 
-    int getElementValue(int index);
+    int getElementValue(int index) override ;
 
-    void addFirst(int value);
+    void addFirst(int value) override;
 
-    void addLast(int value);
+    void addLast(int value) override;
 
-    void insert(int value, int index);
+    void insert(int value, int index) override;
 
-    void removeFirst();
+    void removeFirst() override;
 
-    void removeLast();
+    void removeLast() override;
 
-    void removeOnIndex(int index);
+    void removeOnIndex(int index) override;
 
-    void swap(int index_1, int index_2);
+    void swap(int index_1, int index_2) override;
 
     void print() override;
 
-    int getSize();
+    int getSize() override;
 };
 
 

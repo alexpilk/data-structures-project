@@ -13,6 +13,15 @@ List::List() {
     size = 0;
 }
 
+List::List(int *input_array, int input_size) {
+    head = nullptr;
+    size = 0;
+    for (int i = 0; i < input_size; i++) {
+        addLast(input_array[i]);
+    }
+}
+
+
 List::Element *List::getElement(int index) {
     if (index >= size) {
         throw IndexError();
