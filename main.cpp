@@ -3,9 +3,9 @@
 #include "DynamicArray.h"
 #include "Heap.h"
 #include "utils.h"
+#include "chrono"
 
 using namespace std;
-
 void test_list(){
     cout << "Testing linked list" << endl;
     List my_list = List();
@@ -61,9 +61,20 @@ void test_heap(){
     my_heap.print();
 }
 
+template<class T, typename ReturnType, typename... Args>
+double measure(T* my_list, ReturnType (T::*func)(Args...), Args... args){
+    chrono::steady_clock::time_point begin = chrono::steady_clock::now();
+    (my_list->*func)(args...);
+    chrono::steady_clock::time_point end = chrono::steady_clock::now();
+    return chrono::duration_cast<chrono::microseconds>(end - begin).count();
+}
+
 int main(){
-    test_list();
-    test_dynamic_array();
-    test_heap();
+    int base_array[] = {2, 9, 4, 4, 2, 6, 4, 5, 5, 6, 7, 8, 1, 9, 5};
+    auto* my_list = new List(base_array, getArraySize(base_array));
+    my_list->print();
+    double time = measure(my_list, my_list->getSize);
+    my_list->print();
+    cout << time << endl;
     return 0;
 }
