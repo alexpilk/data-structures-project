@@ -107,13 +107,15 @@ void List::removeOnIndex(int index) {
 }
 
 void List::print() {
-    cout << "[";
     Element *temp = head;
-    while (temp->next != nullptr) {
-        cout << temp->value << ", ";
-        temp = temp->next;
+    if(temp != nullptr) {
+        cout << "[";
+        while (temp->next != nullptr) {
+            cout << temp->value << ", ";
+            temp = temp->next;
+        }
+        cout << temp->value << "]" << endl;
     }
-    cout << temp->value << "]" << endl;
 }
 
 void List::swap(int index_1, int index_2) {

@@ -5,6 +5,7 @@
 #include "utils.h"
 #include "chrono"
 #include "random"
+#include "IndexError.h"
 
 using namespace std;
 
@@ -63,21 +64,18 @@ void test_heap() {
     my_heap.print();
 }
 
-
 void list_vs_array(int repetitions) {
     long long int time_taken;
     int ARRAY_SIZE = 100000;
     int bottom_limit = 0;
-    int top_limit = 1;
+    int top_limit = ARRAY_SIZE;
     int value_to_add = ARRAY_SIZE / 2;
     int insert_index = ARRAY_SIZE / 2;
-    int start_array[ARRAY_SIZE];
-    fillWithRandomValues(start_array, ARRAY_SIZE, 0, 1);
     cout << "Add F\tAdd L\tIns\tRem F\tRem L\tRem IND" << endl;
-
     for (int i = 0; i < repetitions; ++i) {
-
-//         List
+        int start_array[ARRAY_SIZE];
+        fillWithRandomValues(start_array, ARRAY_SIZE, 0, 1);
+        // List
         auto *my_list = new List(start_array, ARRAY_SIZE);
         time_taken = measure(my_list, my_list->addFirst, value_to_add);
         time_taken = measure(my_list, my_list->addLast, value_to_add);
@@ -88,14 +86,14 @@ void list_vs_array(int repetitions) {
         time_taken = measure(my_list, my_list->removeOnIndex, insert_index);
 
         // Array
-//    auto* my_array = new DynamicArray(start_array, ARRAY_SIZE);
-//        time_taken = measure(my_array, my_array->addFirst, value_to_add);
-//        time_taken = measure(my_array, my_array->addLast, value_to_add);
-//        time_taken = measure(my_array, my_array->insert, value_to_add, ARRAY_SIZE/2);
-//
-//        time_taken = measure(my_array, my_array->removeFirst);
-//        time_taken = measure(my_array, my_array->removeLast);
-//        time_taken = measure(my_array, my_array->removeOnIndex, ARRAY_SIZE/2);
+        auto* my_array = new DynamicArray(start_array, ARRAY_SIZE);
+        time_taken = measure(my_array, my_array->addFirst, value_to_add);
+        time_taken = measure(my_array, my_array->addLast, value_to_add);
+        time_taken = measure(my_array, my_array->insert, value_to_add, ARRAY_SIZE/2);
+
+        time_taken = measure(my_array, my_array->removeFirst);
+        time_taken = measure(my_array, my_array->removeLast);
+        time_taken = measure(my_array, my_array->removeOnIndex, ARRAY_SIZE/2);
         cout << endl;
     }
 }
@@ -135,8 +133,90 @@ void heap_measurements(int repetitions) {
     }
 }
 
+void menu() {
+    int start_option;
+    do {
+        cout << "Choose a data structure: dynamic array, list, heap (1-3). Enter 0 to exit:" << endl;
+        cin >> start_option;
+        if (start_option == 0)
+            break;
+        if (start_option == 1 or start_option == 2) {
+            IndexedDataStructure *structure;
+            switch (start_option) {
+                case 1:
+                    structure = new DynamicArray();
+                    break;
+                case 2:
+                    structure = new List();
+                    break;
+                default:
+                    continue;
+            }
+            int action;
+            do {
+                cout << "Available actions: insert, remove (1-2). Enter 0 to exit:" << endl;
+                cin >> action;
+                if (action == 0)
+                    break;
+                int index;
+                cout << "Choose index (enter -1 to access the last element):" << endl;
+                cin >> index;
+                try {
+                    switch (action) {
+                        case 1:
+                            int value;
+                            cout << "Enter value:" << endl;
+                            cin >> value;
+                            if (index == -1)
+                                structure->addLast(value);
+                            else
+                                structure->insert(value, index);
+                            break;
+                        case 2:
+                            if (index == -1)
+                                structure->addLast(value);
+                            else
+                                structure->removeOnIndex(index);
+                            break;
+                        default:
+                            continue;
+                    }
+                } catch (IndexError &e) {
+                    cout << "Index " << index << " out of range" << endl;
+                }
+                structure->print();
+            } while (action != 0);
+        } else if (start_option == 3) {
+            int action;
+            auto *array = new DynamicArray();
+            auto *heap = new Heap(array);
+            do {
+                try {
+                    cout << "Available actions: insert, extract (1-2). Enter 0 to exit:" << endl;
+                    cin >> action;
+                    if (action == 0)
+                        break;
+                    else if (action == 1) {
+                        int value;
+                        cout << "Enter value:" << endl;
+                        cin >> value;
+                        heap->insert(value);
+                    } else if (action == 2) {
+                        int value = heap->extract();
+                        cout << "Extracted " << value << endl;
+                    }
+                    heap->print();
+                } catch (IndexError &e) {
+                    cout << "Cannot extract value from an empty heap" << endl;
+                }
+            } while (action != 0);
+        }
+    } while (start_option != 0);
+}
+
 int main() {
 //    list_vs_array(100);
-    heap_measurements(100);
+//    heap_measurements(100);
+    menu();
     return 0;
 }

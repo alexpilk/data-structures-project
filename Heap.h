@@ -13,7 +13,7 @@
 #include "List.h"
 #include "DynamicArray.h"
 
-class Heap : DataStructure{
+class Heap : public DataStructure{
 private:
     IndexedDataStructure* array;
 public:

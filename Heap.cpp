@@ -103,6 +103,7 @@ void Heap::print() {
         cout << array->getElementValue(i);
         node_counter++;
     }
-    cout << ")" << endl;
+    if(getSize()>0)
+        cout << ")" << endl;
 }
 
