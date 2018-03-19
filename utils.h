@@ -1,5 +1,5 @@
 //
-// Created by Drasik on 3/13/2018.
+// Created by Oleksii Pilkevych on 3/13/2018.
 //
 #include "random"
 #include "chrono"
@@ -28,4 +28,21 @@ int* fillWithRandomValues(int start_array[], int array_size, int bottom_limit, i
     for (int i = 0; i < array_size; i++)
         start_array[i] = distribution(generator);
     return start_array;
+}
+
+pair<int *, int> parse_file(string &file_name, int *array) {
+    int size;
+    ifstream infile(file_name);
+
+    infile >> size;
+
+    array = new int[size];
+    int i = 0, value;
+    while (infile >> value) {
+        array[i] = value;
+        i++;
+    }
+
+    infile.close();
+    return make_pair(array, size);
 }

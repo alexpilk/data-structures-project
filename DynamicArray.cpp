@@ -1,5 +1,5 @@
 //
-// Created by Drasik on 3/11/2018.
+// Created by Oleksii Pilkevych on 3/11/2018.
 //
 #include <iostream>
 #include "DynamicArray.h"

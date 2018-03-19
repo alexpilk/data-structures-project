@@ -1,5 +1,5 @@
 //
-// Created by Drasik on 3/11/2018.
+// Created by Oleksii Pilkevych on 3/11/2018.
 //
 
 #ifndef SDIZO_PROJ_1_INDEXERROR_H
