@@ -59,6 +59,10 @@ void menu() {
                                 structure->insert(value, index);
                             break;
                         case 2:
+                            if (structure->getSize() == 0){
+                                cout << "Cannot remove value from an empty list/array." << endl;
+                                break;
+                            }
                             if (index == -1)
                                 structure->removeLast();
                             else
