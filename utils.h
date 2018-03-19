@@ -1,6 +1,8 @@
 //
 // Created by Oleksii Pilkevych on 3/13/2018.
 //
+#include <iostream>
+#include <fstream>
 #include "random"
 #include "chrono"
 
