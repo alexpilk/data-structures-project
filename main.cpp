@@ -66,10 +66,10 @@ void test_heap() {
 
 void list_vs_array(int repetitions) {
     long long int time_taken;
-    int ARRAY_SIZE = 100000;
+    int ARRAY_SIZE = 75000;
     int bottom_limit = 0;
-    int top_limit = ARRAY_SIZE;
-    int value_to_add = ARRAY_SIZE / 2;
+    int top_limit = 100000;
+    int value_to_add = 50000;
     int insert_index = ARRAY_SIZE / 2;
     cout << "Add F\tAdd L\tIns\tRem F\tRem L\tRem IND" << endl;
     for (int i = 0; i < repetitions; ++i) {
@@ -84,16 +84,6 @@ void list_vs_array(int repetitions) {
         time_taken = measure(my_list, my_list->removeFirst);
         time_taken = measure(my_list, my_list->removeLast);
         time_taken = measure(my_list, my_list->removeOnIndex, insert_index);
-
-        // Array
-        auto* my_array = new DynamicArray(start_array, ARRAY_SIZE);
-        time_taken = measure(my_array, my_array->addFirst, value_to_add);
-        time_taken = measure(my_array, my_array->addLast, value_to_add);
-        time_taken = measure(my_array, my_array->insert, value_to_add, ARRAY_SIZE/2);
-
-        time_taken = measure(my_array, my_array->removeFirst);
-        time_taken = measure(my_array, my_array->removeLast);
-        time_taken = measure(my_array, my_array->removeOnIndex, ARRAY_SIZE/2);
         cout << endl;
     }
 }
@@ -215,8 +205,8 @@ void menu() {
 }
 
 int main() {
-//    list_vs_array(100);
+    list_vs_array(100);
 //    heap_measurements(100);
-    menu();
+//    menu();
     return 0;
 }
