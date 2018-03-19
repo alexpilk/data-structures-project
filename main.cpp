@@ -14,7 +14,7 @@ void menu() {
     string file_name;
     int *base_array;
     do {
-        cout << "Choose a data structure: dynamic array, list, heap (1-3). Enter 0 to exit:" << endl;
+        cout << "Choose a data structure: dynamic array (1), list (2), heap (3). Enter 0 to exit:" << endl;
         cin >> start_option;
         if (start_option == 0)
             break;
@@ -40,7 +40,7 @@ void menu() {
             structure->print();
             int action;
             do {
-                cout << "Available actions: insert, remove (1-2). Enter 0 to exit:" << endl;
+                cout << "Available actions: insert (1), remove (2). Enter 0 to exit:" << endl;
                 cin >> action;
                 if (action == 0)
                     break;
