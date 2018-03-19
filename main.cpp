@@ -91,18 +91,18 @@ void list_vs_array(int repetitions) {
 
 void heap_measurements(int repetitions) {
     long long int time_taken;
-    int ARRAY_SIZE = 50000;
+    int ARRAY_SIZE = 100000;
     int bottom_limit = 0;
-    int top_limit = ARRAY_SIZE;
-    int mid_value = ARRAY_SIZE / 2;
+    int top_limit = 100000;
+    int mid_value = 50000;
     int insert_index = ARRAY_SIZE / 2;
-    int start_array[ARRAY_SIZE];
-    fillWithRandomValues(start_array, ARRAY_SIZE, 0, 1);
-    cout << "AIns min\tIns max\tIns middle\tExtract" << endl;
-    auto *input_array = new DynamicArray(start_array, ARRAY_SIZE);
-    auto *my_heap = new Heap(input_array);
+    cout << "Ins min\tIns max\tIns middle\tExtract" << endl;
 
     for (int i = 0; i < repetitions; ++i) {
+        int start_array[ARRAY_SIZE];
+        fillWithRandomValues(start_array, ARRAY_SIZE, 0, 1);
+        auto *input_array = new DynamicArray(start_array, ARRAY_SIZE);
+        auto *my_heap = new Heap(input_array);
         time_taken = measure(my_heap, my_heap->insert, bottom_limit);
         time_taken = measure(my_heap, my_heap->insert, top_limit);
         time_taken = measure(my_heap, my_heap->insert, mid_value);
@@ -110,17 +110,17 @@ void heap_measurements(int repetitions) {
         cout << endl;
     }
 
-    cout << "LIns min\tIns max\tIns middle\tExtract" << endl;
-    auto *input_list = new List(start_array, ARRAY_SIZE);
-    auto *my_heap_list = new Heap(input_list);
-
-    for (int i = 0; i < repetitions; ++i) {
-        time_taken = measure(my_heap_list, my_heap_list->insert, bottom_limit);
-        time_taken = measure(my_heap_list, my_heap_list->insert, top_limit);
-        time_taken = measure(my_heap_list, my_heap_list->insert, mid_value);
-        time_taken = measure(my_heap_list, my_heap_list->extract);
-        cout << endl;
-    }
+//    cout << "LIns min\tIns max\tIns middle\tExtract" << endl;
+//    auto *input_list = new List(start_array, ARRAY_SIZE);
+//    auto *my_heap_list = new Heap(input_list);
+//
+//    for (int i = 0; i < repetitions; ++i) {
+//        time_taken = measure(my_heap_list, my_heap_list->insert, bottom_limit);
+//        time_taken = measure(my_heap_list, my_heap_list->insert, top_limit);
+//        time_taken = measure(my_heap_list, my_heap_list->insert, mid_value);
+//        time_taken = measure(my_heap_list, my_heap_list->extract);
+//        cout << endl;
+//    }
 }
 
 void menu() {
@@ -205,8 +205,8 @@ void menu() {
 }
 
 int main() {
-    list_vs_array(100);
-//    heap_measurements(100);
+//    list_vs_array(100);
+    heap_measurements(100);
 //    menu();
     return 0;
 }
