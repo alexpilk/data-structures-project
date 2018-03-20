@@ -33,6 +33,8 @@ public:
 
     int getElementValue(int index) override ;
 
+    int search(int value);
+
     void addFirst(int value) override;
 
     void addLast(int value) override;

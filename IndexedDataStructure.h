@@ -12,6 +12,8 @@ class IndexedDataStructure : public DataStructure{
 public:
     virtual int getElementValue(int index) = 0;
 
+    virtual int search(int value) = 0;
+
     virtual void addFirst(int value) = 0;
 
     virtual void addLast(int value) = 0;

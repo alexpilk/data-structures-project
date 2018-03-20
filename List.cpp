@@ -33,6 +33,18 @@ List::Element *List::getElement(int index) {
     return current_element;
 }
 
+int List::search(int value){
+    Element *temp = head;
+    int i = 0;
+    while (temp != nullptr) {
+        if(temp->value == value)
+            return i;
+        temp = temp->next;
+        i++;
+    }
+    return -1;
+}
+
 int List::getElementValue(int index) {
     Element *element = getElement(index);
     return element->value;

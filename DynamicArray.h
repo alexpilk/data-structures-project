@@ -19,6 +19,8 @@ public:
 
     int getElementValue(int index) override;
 
+    int search(int value) override;
+
     void addFirst(int value) override;
 
     void addLast(int value) override;

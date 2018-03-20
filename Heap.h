@@ -21,6 +21,8 @@ public:
     explicit Heap(IndexedDataStructure* input_array);
     void buildHeap();
     void heapify(int size, int root_index);
+    bool search(int value);
+    bool search(int value, int start_node_index, int size);
     int findMax();
     int extract();
     int getSize();

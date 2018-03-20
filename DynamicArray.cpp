@@ -21,6 +21,16 @@ int DynamicArray::getElementValue(int index) {
     return array[index];
 }
 
+
+int DynamicArray::search(int value){
+    for (int i = 0; i < size; i++) {
+        if(array[i] == value){
+            return i;
+        }
+    }
+    return -1;
+}
+
 void DynamicArray::addFirst(int value) {
     insert(value, 0);
 }

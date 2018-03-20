@@ -40,16 +40,16 @@ void menu() {
             structure->print();
             int action;
             do {
-                cout << "Available actions: insert (1), remove (2). Enter 0 to exit:" << endl;
+                cout << "Available actions: insert (1), remove (2), search (3). Enter 0 to exit:" << endl;
                 cin >> action;
                 if (action == 0)
                     break;
                 int index;
-                cout << "Choose index (enter -1 to access the last element):" << endl;
-                cin >> index;
                 try {
                     switch (action) {
                         case 1:
+                            cout << "Choose index (enter -1 to access the last element):" << endl;
+                            cin >> index;
                             int value;
                             cout << "Enter value:" << endl;
                             cin >> value;
@@ -59,6 +59,8 @@ void menu() {
                                 structure->insert(value, index);
                             break;
                         case 2:
+                            cout << "Choose index (enter -1 to access the last element):" << endl;
+                            cin >> index;
                             if (structure->getSize() == 0){
                                 cout << "Cannot remove value from an empty list/array." << endl;
                                 break;
@@ -68,6 +70,17 @@ void menu() {
                             else
                                 structure->removeOnIndex(index);
                             break;
+                        case 3: {
+                            int value;
+                            cout << "Enter value:" << endl;
+                            cin >> value;
+                            int search_index = structure->search(value);
+                            if (search_index == -1)
+                                cout << "Value not found" << endl;
+                            else
+                                cout << "Found value on index " << search_index << endl;
+                            break;
+                        }
                         default:
                             continue;
                     }
@@ -75,7 +88,7 @@ void menu() {
                     cout << "Index " << index << " out of range" << endl;
                 }
                 structure->print();
-            } while (action != 0);
+            } while (true);
         } else if (start_option == 3) {
             int action;
             file_name = "heap.txt";
@@ -86,7 +99,7 @@ void menu() {
             heap->print();
             do {
                 try {
-                    cout << "Available actions: insert, extract (1-2). Enter 0 to exit:" << endl;
+                    cout << "Available actions: insert (1), extract (2), search (3). Enter 0 to exit:" << endl;
                     cin >> action;
                     if (action == 0)
                         break;
@@ -98,15 +111,25 @@ void menu() {
                     } else if (action == 2) {
                         int value = heap->extract();
                         cout << "Extracted " << value << endl;
+                    } else if (action == 3) {
+                        int value;
+                        cout << "Enter value:" << endl;
+                        cin >> value;
+                        int found = heap->search(value);
+                        if(found)
+                            cout << "Value " << value << " found" << endl;
+                        else
+                            cout << "Value " << value << " NOT found" << endl;
                     }
                     heap->print();
                 } catch (IndexError &e) {
                     cout << "Cannot extract value from an empty heap" << endl;
                 }
-            } while (action != 0);
+            } while (true);
         }
-    } while (start_option != 0);
+    } while (true);
 }
+
 
 int main() {
     menu();

@@ -125,6 +125,34 @@
 //}
 //
 //
+
+//void measure_search(int repetitions, int array_size) {
+//    long long int time_taken;
+//    int ARRAY_SIZE = array_size;
+//    int bottom_limit = 0;
+//    int top_limit = 100000;
+//    int middle_index = ARRAY_SIZE / 2;
+//
+//    int min_value = -1;
+//    int middle_value = 50000;
+//    int max_value = 100001;
+//
+//    cout << "S_F\tS_L\tS_M" << endl;
+//    for (int i = 0; i < repetitions; ++i) {
+//        int start_array[ARRAY_SIZE];
+//        fillWithRandomValues(start_array, ARRAY_SIZE, bottom_limit, top_limit);
+//        start_array[0] = max_value;
+//        start_array[ARRAY_SIZE-1] = min_value;
+//        start_array[middle_index] = middle_value;
+//        // List
+//        auto *base_array = new DynamicArray(start_array, ARRAY_SIZE);
+//        auto *my_list = new Heap(base_array);
+//        time_taken = measure(my_list, my_list->search, min_value);
+//        time_taken = measure(my_list, my_list->search, max_value);
+//        time_taken = measure(my_list, my_list->search, middle_value);
+//        cout << endl;
+//    }
+//}
 ////int main() {
 ////    test_list();
 ////    test_dynamic_array();

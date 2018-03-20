@@ -15,7 +15,7 @@ Heap::Heap(IndexedDataStructure *input_array) {
     buildHeap();
 }
 
-void Heap::buildHeap(){
+void Heap::buildHeap() {
     // index of the rightmost node on second to last level
     int start_index = getSize() / 2 - 1;
     for (int i = start_index; i >= 0; i--)
@@ -55,6 +55,35 @@ int Heap::findMax() {
         throw IndexError();
 }
 
+bool Heap::search(int value) {
+    int size = getSize();
+    if (getSize() > 0) {
+        if (findMax() > value) {
+            int root_index = 0;
+            return search(value, root_index, size);
+        }
+    };
+    return false;
+}
+
+bool Heap::search(int value, int start_node_index, int size) {
+    int node_value = array->getElementValue(start_node_index);
+    if (node_value == value)
+        return true;
+    else if (node_value < value)
+        return false;
+    bool found = false;
+    int left_index = 2 * start_node_index + 1;
+    int right_index = 2 * start_node_index + 2;
+    if (left_index < size) {
+        found = search(value, left_index, size);
+    }
+    if (!found && right_index < size) {
+        found = search(value, right_index, size);
+    }
+    return found;
+}
+
 int Heap::extract() {
     int output_element = findMax();
     array->removeFirst();
@@ -62,14 +91,14 @@ int Heap::extract() {
     return output_element;
 }
 
-int Heap::getSize(){
+int Heap::getSize() {
     return array->getSize();
 }
 
 void Heap::insert(int value) {
     array->addLast(value);
     int size = getSize();
-    int element_index = size-1;
+    int element_index = size - 1;
     int parent_index;
     while (element_index > 0) {
         parent_index = int(floor(element_index / 2));
@@ -103,7 +132,7 @@ void Heap::print() {
         cout << array->getElementValue(i);
         node_counter++;
     }
-    if(getSize()>0)
+    if (getSize() > 0)
         cout << ")" << endl;
 }
 
