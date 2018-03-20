@@ -58,7 +58,7 @@ int Heap::findMax() {
 bool Heap::search(int value) {
     int size = getSize();
     if (getSize() > 0) {
-        if (findMax() > value) {
+        if (findMax() >= value) {
             int root_index = 0;
             return search(value, root_index, size);
         }
